@@ -14,6 +14,7 @@ Méthode :
  * Définir une classe intermédiaire à qui déléguer l'instantiation
  * Cette classe aura la liberté de fournir ses propres options
  * Elle sera en charge de sélection les bons paramètres à passer au constructeur
+ * Elle pourra également choisir la classe a instancier
  
 Complément d'info :
 -------------------
