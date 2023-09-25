@@ -4,8 +4,13 @@ class Form
 {
     private array $fields = [];
 
-    public function addField(Field $field)
+    private function addField(Field $field)
     {
         $this->fields[$field->getName()] = $field;
+    }
+
+    public function getAll(): array
+    {
+        return $this->fields;
     }
 }
