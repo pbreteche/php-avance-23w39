@@ -3,7 +3,8 @@
     "description": "A training workshop to evaluate PDF generation.",
     "type": "project",
     "require": {
-        "spipu/html2pdf": "^5.2"
+        "spipu/html2pdf": "^5.2",
+        "knplabs/knp-snappy": "^1.4"
     },
     "license": "MIT",
     "autoload": {

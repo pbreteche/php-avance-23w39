@@ -1,8 +1,8 @@
 <?php
 
-use Pierre\PdfExample\PdfMaker;
+use Pierre\PdfExample\PdfPrinter;
 
 include __DIR__.'/../vendor/autoload.php';
 
-$maker = new PdfMaker();
-$maker->makePdf();
+$maker = new PdfPrinter();
+$maker->printPdf();

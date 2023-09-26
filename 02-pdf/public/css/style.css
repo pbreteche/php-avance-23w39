@@ -1,0 +1,13 @@
+.brand {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.brand h1 {
+    text-align: center;
+    border: 2px solid darkblue;
+}
+
+.brand img {
+    max-height: 4em;
+}
