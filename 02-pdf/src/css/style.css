@@ -1,0 +1,16 @@
+.brand {
+    vertical-align: middle;
+}
+
+.brand h1 {
+    text-align: center;
+    width: fit-content(60ch);
+    margin: 1em auto;
+    border: 2px solid darkblue;
+    display: inline-block;
+}
+
+.brand img {
+    display: inline-block;
+    max-height: 8em;
+}

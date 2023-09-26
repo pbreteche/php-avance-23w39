@@ -9,7 +9,7 @@ class PdfMaker
     public function makePdf()
     {
         ob_start();
-        include __DIR__.'/html_demo.html';
+        include __DIR__.'/html_demo.php';
         $htmlDocument = ob_get_clean();
 
 

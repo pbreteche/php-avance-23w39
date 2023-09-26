@@ -4,9 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        <?php include __DIR__.'/css/style.css'; ?>
+    </style>
 </head>
 <body>
-    <h1>Le titre du PDF</h1>
+
+    <div class="brand">
+        <img src="<?= __DIR__.'/images/dawan-logo.png'?>" alt="Logo Dawan">
+        <h1>Le titre du PDF</h1>
+    </div>
     <div>
         <h2>Le premier article est bien</h2>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur soluta nostrum, vitae deleniti, illo eos inventore culpa sed quo et repellendus quis distinctio iusto odit aut modi non quia facilis!</p>
