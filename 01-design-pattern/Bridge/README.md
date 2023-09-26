@@ -12,3 +12,7 @@ Par exemple :
 Méthode :
 ---------
 Je crée une classe qui sera capable de transformer une instance de la première implémentation en la seconde, et réciproquement.
+
+Atelier :
+---------
+Créer une suite d'instructions avec à partir d'une instance d'une première classe Lib1\HttpRequest, nous permet d'obtenir un équivalent au format d'une instance de la seconde classe Lib2\HttpRequest.
