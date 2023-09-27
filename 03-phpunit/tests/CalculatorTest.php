@@ -3,22 +3,38 @@
 namespace Pierre\Tests;
 
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Pierre\UnitTest\Calculator;
 
 #[CoversClass(Calculator::class)]
 class CalculatorTest extends TestCase
 {
-    public function testAdd()
+    #[DataProvider('addProvider')]
+    public function testAdd(int $a, int $b, int $expected): void
     {
         $calculator = new Calculator();
 
-        $result = $calculator->add(3, 4);
+        $result = $calculator->add($a, $b);
 
-        $this->assertEquals(7, $result, 'La somme de 3 et 4 doit retourner 7');
+        $this->assertEquals($expected, $result, 'La somme de 3 et 4 doit retourner 7');
+    }
 
-        $this->markTestIncomplete(
-            'Le test est encore incomplet.',
-        );
+    public function testAddErrors(): void
+    {
+        $calculator = new Calculator();
+
+        $this->expectException(\TypeError::class);
+
+        $calculator->add('bonjour', '4');
+    }
+
+    public static function addProvider(): array
+    {
+        return [
+            [3, 4, 7],
+            [-4, 4, 0],
+            [-3, -4, -7],
+        ];
     }
 }
