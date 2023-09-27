@@ -1,0 +1,19 @@
+{
+    "name": "pierre/03-phpunit",
+    "require-dev": {
+        "phpunit/phpunit": "^10.3"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Pierre\\03Phpunit\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Pierre Bretéché",
+            "email": "pbreteche@dawan.fr"
+        }
+    ],
+    "require": {}
+}
