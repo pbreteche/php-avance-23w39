@@ -6,7 +6,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Pierre\\03Phpunit\\": "src/"
+            "Pierre\\UnitTest\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Pierre\\Tests\\": "tests/"
         }
     },
     "authors": [
