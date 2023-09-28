@@ -3,11 +3,12 @@
 namespace Pierre\DemoOrm\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Pierre\DemoOrm\Repository\ArticleRepository;
 
 // Entity, configuration sur la gestion de l'objet PHP
 //      par l'entity manager.
 //Table, configuration liée à la table en base de données
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: ArticleRepository::class)]
 #[ORM\Table]
 class Article
 {
@@ -26,7 +27,7 @@ class Article
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $title = null;
 
-    #[ORM\ManyToOne]
+    #[ORM\ManyToOne(fetch: 'EAGER')] // chargement systématique des données de l'auteur
     private ?Author $writtenBy = null;
 
     public function getId(): ?int

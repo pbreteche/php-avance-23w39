@@ -40,3 +40,16 @@ if ($article1) {
 
 // permet de donner des critères de filtre, tri, limiter le nombre de résultats
 $someArticles = $articleRepository->findBy([], ['title' => 'desc'], 10);
+
+$otherArticles = $articleRepository->findByTitleStartingWith('Il est');
+$otherArticles = $articleRepository->findByTitleStartingWith2('Il est');
+foreach ($otherArticles as $article) {
+    // Lazy loading :
+    // Par défaut, Doctrine ne charge que les propriétés propres de l'article
+    // Si on essaye d'accéder à l'auteur, une requête SQL est automatiquement déclenchée
+    // afin de récupérer les infos de celui-ci (via la clé primaire)
+    // Possibilité de charger les données de l'auteur dès la première requête :
+    //   - soit explicitement dans le SELECT
+    //   - soit en changeant le comportement par défaut sur la relation
+    echo $article->getTitle().' '.$article->getWrittenBy()?->getName()." (QB)\n";
+}
