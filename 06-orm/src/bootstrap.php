@@ -9,13 +9,13 @@ require_once "vendor/autoload.php";
 
 // Create a simple "default" Doctrine ORM configuration for Attributes
 $config = ORMSetup::createAttributeMetadataConfiguration(
-    paths: array(__DIR__."/src"),
+    paths: array(__DIR__.'/Entity'),
     isDevMode: true,
 );
 
 $dsnParser = new DsnParser(['mysql' => 'pdo_mysql']);
 $connectionParams = $dsnParser
-    ->parse(file_get_contents(__DIR__.'/../config/doctrine-dsn'));
+    ->parse(trim(file_get_contents(__DIR__.'/../config/doctrine-dsn')));
 
 // configuring the database connection
 $connection = DriverManager::getConnection($connectionParams, $config);
