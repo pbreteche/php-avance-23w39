@@ -1,0 +1,23 @@
+{
+    "name": "pierre/demo-orm",
+    "type": "project",
+    "require": {
+        "php": "8.2",
+        "doctrine/orm": "^2.16",
+        "doctrine/dbal": "^3.7",
+        "symfony/cache": "^6.3",
+        "symfony/yaml": "^6.3"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Pierre\\DemoOrm\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Pierre Bretéché",
+            "email": "pbreteche@dawan.fr"
+        }
+    ]
+}
