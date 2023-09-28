@@ -26,6 +26,9 @@ class Article
     #[ORM\Column(type: 'string', length: 255)]
     private ?string $title = null;
 
+    #[ORM\ManyToOne]
+    private ?Author $writtenBy = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -39,6 +42,18 @@ class Article
     public function setTitle(?string $title): Article
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getWrittenBy(): ?Author
+    {
+        return $this->writtenBy;
+    }
+
+    public function setWrittenBy(?Author $writtenBy): Article
+    {
+        $this->writtenBy = $writtenBy;
 
         return $this;
     }
