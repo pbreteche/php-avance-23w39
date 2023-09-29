@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -23,8 +24,12 @@ class PostController extends AbstractController
         SerializerInterface $serializer,
         ValidatorInterface $validator,
         EntityManagerInterface $manager,
+        #[CurrentUser] ?User $user,
     ): Response {
-        $post = $serializer->deserialize($request->getContent(), Post::class, 'json');
+        $post = $serializer->deserialize($request->getContent(), Post::class, 'json', [
+            'groups' => ['edit'],
+        ]);
+        $post->setWrittenBy($user);
         $violations = $validator->validate($post);
 
         if (0 < $violations->count()) {
@@ -36,21 +41,20 @@ class PostController extends AbstractController
 
         return $this->json('', Response::HTTP_CREATED);
     }
+
     #[Route('/{id}', methods: 'PUT')]
+    #[IsGranted('POST_EDIT', subject: 'post')]
     public function update(
         Post $post,
         Request $request,
         SerializerInterface $serializer,
         ValidatorInterface $validator,
         EntityManagerInterface $manager,
-        #[CurrentUser] ?User $user,
     ): Response {
-        if (!$user || $user !== $post->getWrittenBy()) {
-            throw $this->createAccessDeniedException();
-        }
-        $serializer->deserialize($request->getContent(), Post::class, 'json'
-            , [AbstractNormalizer::OBJECT_TO_POPULATE => $post]
-        );
+        $serializer->deserialize($request->getContent(), Post::class, 'json', [
+            'groups' => ['edit'],
+            AbstractNormalizer::OBJECT_TO_POPULATE => $post,
+        ]);
         $violations = $validator->validate($post);
 
         if (0 < $violations->count()) {

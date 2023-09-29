@@ -18,12 +18,12 @@ class Post
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['teaser', 'full'])]
+    #[Groups(['teaser', 'full','edit'])]
     #[Assert\NotBlank]
     #[Assert\Length(max: 65)]
     private ?string $title = null;
 
-    #[Groups(['full'])]
+    #[Groups(['full','edit'])]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $body = null;
 
