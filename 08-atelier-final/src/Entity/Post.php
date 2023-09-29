@@ -34,6 +34,11 @@ class Post
     #[ORM\Column(length: 255, enumType: PostStateEnum::class)]
     private PostStateEnum $state = PostStateEnum::Draft;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotNull]
+    private ?User $writtenBy = null;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -81,6 +86,18 @@ class Post
     public function setState(PostStateEnum $state): static
     {
         $this->state = $state;
+
+        return $this;
+    }
+
+    public function getWrittenBy(): ?User
+    {
+        return $this->writtenBy;
+    }
+
+    public function setWrittenBy(?User $writtenBy): static
+    {
+        $this->writtenBy = $writtenBy;
 
         return $this;
     }
