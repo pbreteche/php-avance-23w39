@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -32,5 +33,26 @@ class PostController extends AbstractController
         $manager->flush();
 
         return $this->json('', Response::HTTP_CREATED);
+    }
+    #[Route('/{id}', methods: 'PUT')]
+    public function update(
+        Post $post,
+        Request $request,
+        SerializerInterface $serializer,
+        ValidatorInterface $validator,
+        EntityManagerInterface $manager,
+    ): Response {
+        $serializer->deserialize($request->getContent(), Post::class, 'json'
+            , [AbstractNormalizer::OBJECT_TO_POPULATE => $post]
+        );
+        $violations = $validator->validate($post);
+
+        if (0 < $violations->count()) {
+            return $this->json(['errors' => $violations], Response::HTTP_PRECONDITION_FAILED);
+        }
+
+        $manager->flush();
+
+        return $this->json('');
     }
 }
