@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\PostRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -28,8 +29,9 @@ class Post
     private ?string $body = null;
 
     #[ORM\Column]
+    #[Gedmo\Timestampable(on: 'create')]
     #[Groups(['teaser', 'full'])]
-    private \DateTimeImmutable $createdAt;
+    private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(length: 255, enumType: PostStateEnum::class)]
     private PostStateEnum $state = PostStateEnum::Draft;
@@ -38,11 +40,6 @@ class Post
     #[ORM\JoinColumn(nullable: false)]
     #[Assert\NotNull]
     private ?User $writtenBy = null;
-
-    public function __construct()
-    {
-        $this->createdAt = new \DateTimeImmutable();
-    }
 
     public function getId(): ?int
     {
