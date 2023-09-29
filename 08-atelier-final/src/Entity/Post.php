@@ -13,18 +13,19 @@ class Post
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['public'])]
+    #[Groups(['teaser', 'full'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['public'])]
+    #[Groups(['teaser', 'full'])]
     private ?string $title = null;
 
+    #[Groups(['full'])]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $body = null;
 
     #[ORM\Column]
-    #[Groups(['public'])]
+    #[Groups(['teaser', 'full'])]
     private ?\DateTimeImmutable $createdAt;
 
     #[ORM\Column(length: 255, enumType: PostStateEnum::class)]

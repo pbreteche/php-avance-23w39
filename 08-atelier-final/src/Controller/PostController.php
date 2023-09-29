@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Post;
 use App\Entity\PostStateEnum;
 use App\Repository\PostRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,7 +29,20 @@ class PostController extends AbstractController
         ];
 
         return $this->json($body, Response::HTTP_OK, [], [
-            'groups' => ['public'],
+            'groups' => ['teaser'],
+        ]);
+    }
+
+    #[Route('/{id}', requirements: ['id' => '\d+'], methods: 'GET')]
+    public function show(
+        Post $post,
+    ): Response {
+        if ($post->getState() !== PostStateEnum::Published) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->json(['request_time' => time(), 'data' => $post], Response::HTTP_OK, [], [
+            'groups' => ['full'],
         ]);
     }
 }
