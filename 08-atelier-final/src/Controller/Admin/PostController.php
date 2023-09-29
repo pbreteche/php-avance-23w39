@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Attribute\Cache;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\CurrentUser;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
@@ -44,6 +45,7 @@ class PostController extends AbstractController
 
     #[Route('/{id}', methods: 'PUT')]
     #[IsGranted('POST_EDIT', subject: 'post')]
+    #[Cache(expires: 'tomorrow', public: true)]
     public function update(
         Post $post,
         Request $request,
